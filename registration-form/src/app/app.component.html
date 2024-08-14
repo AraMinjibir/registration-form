@@ -1,63 +1,79 @@
 <section class="container">
   <header>Registration Form</header>
 
-  <form class="form">
+  <form class="form" [formGroup] = "registrationForm" (ngSubmit) = "OnFormSubmitted()">
     <div class="column">
       <div class="input-box">
-        <input type="text" placeholder="First Name"/>
+        <input type="text" placeholder="First Name" formControlName = "firstName" />
+        <small *ngIf = "registrationForm.get('firstName').invalid && registrationForm.get('firstName').touched"> *First Name field mustn't be empty</small>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="Last Name"/>
+        <input type="text" placeholder="Last Name" formControlName = "lastName"/>
+        <small *ngIf = "registrationForm.get('lastName').invalid && registrationForm.get('lastName').touched"> *Last Name field mustn't be empty </small>
       </div>
     </div>    
 
     <div class="input-box">
-      <input type="text" placeholder="Email"/>
+      <input type="text" placeholder="Email" formControlName = "email"/>
+      <small *ngIf = "registrationForm.get('email').invalid && registrationForm.get('email').touched"> *You entered an invalid email address</small>
     </div>    
 
     <div class="gender-box">
       <h3>Gender</h3>
       <div class="gender-option">
         <div class="gender">
-          <input type="radio" value="male" id="check-male"/>
+          <input type="radio" value="male" id="check-male" formControlName = "gender"/>
           <label for="check-male">Male</label>
         </div>
         <div class="gender">
-          <input type="radio" value="female" id="check-female"/>
+          <input type="radio" value="female" id="check-female" formControlName = "gender"/>
           <label for="check-female">Female</label>
         </div>
         <div class="gender">
-          <input type="radio" value="other" id="check-other"/>
+          <input type="radio" value="other" id="check-other" formControlName = "gender"/>
           <label for="check-other">Prefer not to say</label>
         </div>
       </div>
     </div>
 
-    <div class="input-box address">
+    <div class="input-box address" formGroupName = "address">
       <label>Address</label>
-      <input type="text" placeholder="Street address"/>
+      <input type="text" placeholder="Street address" formControlName = "street"/>
+      <small *ngIf = "registrationForm.get('address.street').invalid 
+      && registrationForm.get('address.street').touched"> 
+      *Street field mustn't be empty</small>
 
       <div class="column">
         <div class="select-box">
-          <select name="country">
+          <select name="country" formControlName = "country">
             <option hidden>Country</option>
             <option>America</option>
             <option>Japan</option>
             <option>India</option>
             <option>Nepal</option>
           </select>
+          <small *ngIf = "registrationForm.get('address.country').invalid && registrationForm.get('address.country').touched"> *Country must be selected </small>
         </div>
         <div>
-          <input type="text" placeholder="City"/>
+          <input type="text" placeholder="City" formControlName = "city"/>
         </div>
           
       </div>
       <div class="column">
-        <input type="text" placeholder="Region"/>
-        <input type="number" placeholder="Postal code"/>
+        <input type="text" placeholder="Region" formControlName = "region"/>
+        <input type="number" placeholder="Postal code" formControlName = "postal"/>
+
+        <small *ngIf = "registrationForm.get('address.postal').invalid && 
+        registrationForm.get('address.postal').touched"> 
+        *Postal code must be choosed </small>
       </div>
     </div>
-    <input type="submit" value="Submit" class="submit-btn">
+    <div class="input-box" formArrayName = "skills">
+      <input type="text" placeholder="Enter skill..." 
+      *ngFor = "let control of registrationForm.get('skills')['controls']; let i = index " 
+      [formControlName]  = "i">
+    </div>
+    <input type="submit" value="Submit" class="submit-btn" [disabled] = "registrationForm.invalid">
 
     <!--HTML for Skills Form Array -->
     <!-- <div class="input-box skills" formArrayName="skills">
