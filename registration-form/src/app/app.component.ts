@@ -1,46 +1,22 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+
+import { Component} from '@angular/core';
+import {  RouterOutlet } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { NgIf } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
+
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ReactiveFormsModule, NgIf, NgFor],
+  imports: [RouterOutlet, HomeComponent, HeaderComponent, NgIf, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'registration-form';
-
-  registrationForm: FormGroup;
-
-  ngOnInit(){
-    this.registrationForm = new FormGroup ({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      gender: new FormControl(''),
-      address: new FormGroup({
-        street: new FormControl('', Validators.required),
-        country:new  FormControl('', Validators.required),
-        city: new  FormControl(''),
-        postal: new  FormControl('',Validators.required),
-        region: new  FormControl(''),
-      }),
-
-      skills: new FormArray([
-        new FormControl(null, Validators.required),
-        new FormControl(null, Validators.required),
-        new FormControl(null, Validators.required),
-      ])
-    })
-
-   
-  }
-
-  OnFormSubmitted(){
-    console.log(this.registrationForm.value);
-    this.registrationForm.reset()
-  }
+ showConfirm:boolean = false;
 }

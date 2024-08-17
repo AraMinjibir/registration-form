@@ -3,3 +3,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+
+
+.btn-add-delete{
+    margin: 10px 0px;
+    padding: 14px 30px;
+    border-radius: 5px;
+    background: #E7005E;
+    border: none;
+    color: white;
+  }

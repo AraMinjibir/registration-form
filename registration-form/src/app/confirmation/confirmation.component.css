@@ -1,0 +1,14 @@
+.card{
+    background: hsl(0, 36%, 77%) !important;
+}
+.btn-add-delete{
+    margin: 10px 0px;
+    padding: 14px 30px;
+    border-radius: 5px;
+    background: #b30248;
+    border: none;
+    color: white;
+  }
+h5, p{
+    color: white;
+}
