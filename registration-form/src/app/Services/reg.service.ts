@@ -10,6 +10,7 @@ export class RegService {
   constructor(private http: HttpClient) { }
 
   OnsendForm(data: Reg){
-    this.http.post('hhbvhfaqivfioiqow', data).subscribe();
+    this.http.post('https://registration-form-155d6-default-rtdb.firebaseio.com/reg-form.json'
+    , data).subscribe();
   }
 }

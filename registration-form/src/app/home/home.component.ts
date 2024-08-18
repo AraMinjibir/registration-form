@@ -4,7 +4,7 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { Router  } from '@angular/router';
 import { RegService } from '../Services/reg.service';
 import { Reg } from '../Model/reg';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -16,8 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit{
 
   route: Router = inject(Router);
-  // regService: RegService = inject(RegService);
-  http: HttpClient = inject(HttpClient);
+  regService: RegService = inject(RegService);
   registrationForm: FormGroup;
   showingRegForm: boolean = true;
   showConfirm:boolean = true;
@@ -48,10 +47,9 @@ export class HomeComponent implements OnInit{
   }
 
 
-  OnFormSubmitted(data: Reg){
-    console.log(this.registrationForm)
-    // this.regService.OnsendForm();
-    this.http.post('', data)
+  OnFormSubmitted(){
+    const data: Reg = this.registrationForm.value as Reg;
+    this.regService.OnsendForm(data);
     this.showingRegForm = false;
     this.showConfirm = true;
    this.route.navigate(['/confirmation'])
